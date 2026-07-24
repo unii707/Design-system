@@ -1,6 +1,4 @@
 import { Button, Popconfirm, type ButtonProps } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import { BRAND_COLORS } from '../../theme/tokens';
 
 export interface ConfirmDeleteButtonProps {
   /** Popconfirm 제목 */
@@ -42,7 +40,6 @@ export function ConfirmDeleteButton({
       okText="삭제"
       cancelText="취소"
       okType="danger"
-      icon={<QuestionCircleOutlined style={{ color: BRAND_COLORS.error }} />}
       disabled={disabled}
     >
       <Button danger loading={loading} disabled={disabled} size={size}>
