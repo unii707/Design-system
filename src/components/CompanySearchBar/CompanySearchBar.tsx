@@ -1,6 +1,6 @@
 import { Button, Flex, Input, Select } from 'antd';
 import { useState } from 'react';
-import { BRAND_SPACING } from '../../theme/tokens';
+import { spacingTokens } from '../../theme/tokens';
 
 export interface CompanySearchBarFilterOption {
   label: string;
@@ -40,7 +40,7 @@ export function CompanySearchBar({
   const [keyword, setKeyword] = useState('');
 
   return (
-    <Flex gap={BRAND_SPACING.sm} align="center" wrap="wrap">
+    <Flex gap={spacingTokens.sm} align="center" wrap="wrap">
       <Select
         options={filterOptions}
         value={filterValue}

@@ -2,104 +2,143 @@ import { ConfigProvider, type ThemeConfig } from 'antd';
 import koKR from 'antd/locale/ko_KR';
 import { createElement, type PropsWithChildren } from 'react';
 import {
-  BRAND_COLORS,
-  BRAND_SHADOWS,
-  BRAND_SIZES,
-  BRAND_SPACING,
-  BRAND_TYPOGRAPHY,
+  colorTokens,
+  textTokens,
+  typographyTokens,
+  spacingTokens,
+  radiusTokens,
+  sizeTokens,
+  shadowTokens,
+  breakpointTokens,
+  zIndexTokens,
+  motionTokens,
+  componentTokens,
 } from './tokens';
 
 /**
  * AntD ConfigProvider에 주입되는 회사 전용 테마.
- * 모든 값은 반드시 tokens.ts의 브랜드 원시 토큰을 참조합니다.
+ *
+ * 이 파일만이 tokens.ts의 프레임워크 중립 값을 "AntD의 SeedToken/AliasToken/
+ * ComponentToken 이름"으로 변환하는 유일한 장소입니다. 다른 UI 라이브러리로
+ * 전환하게 되면 tokens.ts는 그대로 두고, 이 파일과 동일한 역할을 하는
+ * 매핑 파일만 새로 작성하면 됩니다.
  */
 export const companyTheme: ThemeConfig = {
   token: {
-    colorPrimary: BRAND_COLORS.primary,
-    colorSuccess: BRAND_COLORS.success,
-    colorWarning: BRAND_COLORS.warning,
-    colorError: BRAND_COLORS.error,
-    colorInfo: BRAND_COLORS.info,
+    // Color
+    colorPrimary: colorTokens.brand[500],
+    colorSuccess: colorTokens.semantic.success.base,
+    colorWarning: colorTokens.semantic.warning.base,
+    colorError: colorTokens.semantic.error.base,
+    colorInfo: colorTokens.semantic.info.base,
 
-    colorText: BRAND_COLORS.textPrimary,
-    colorTextSecondary: BRAND_COLORS.textSecondary,
-    colorTextTertiary: BRAND_COLORS.textTertiary,
-    colorTextDisabled: BRAND_COLORS.textDisabled,
+    // Text
+    colorText: textTokens.onLight.primary,
+    colorTextSecondary: textTokens.onLight.secondary,
+    colorTextTertiary: textTokens.onLight.tertiary,
+    colorTextDisabled: textTokens.onLight.disabled,
 
-    colorBgLayout: BRAND_COLORS.bgLayout,
-    colorBgContainer: BRAND_COLORS.bgContainer,
-    colorBgSpotlight: BRAND_COLORS.bgSpotlight,
+    // Background
+    colorBgLayout: colorTokens.gray[100],
+    colorBgContainer: colorTokens.base.white,
+    colorBgSpotlight: colorTokens.gray[50],
 
-    colorBorder: BRAND_COLORS.border,
-    colorBorderSecondary: BRAND_COLORS.borderSecondary,
+    // Border
+    colorBorder: colorTokens.gray[300],
+    colorBorderSecondary: colorTokens.gray[200],
 
-    fontFamily: BRAND_TYPOGRAPHY.fontFamily,
-    fontSize: BRAND_TYPOGRAPHY.fontSizeBase,
-    fontSizeSM: BRAND_TYPOGRAPHY.fontSizeSm,
-    fontSizeLG: BRAND_TYPOGRAPHY.fontSizeLg,
-    fontSizeXL: BRAND_TYPOGRAPHY.fontSizeXl,
-    fontSizeHeading1: BRAND_TYPOGRAPHY.fontSizeHeading,
-    lineHeight: BRAND_TYPOGRAPHY.lineHeightBase,
+    // Typography
+    fontFamily: typographyTokens.fontFamily.base,
+    fontSize: typographyTokens.fontSize.base,
+    fontSizeSM: typographyTokens.fontSize.sm,
+    fontSizeLG: typographyTokens.fontSize.lg,
+    fontSizeXL: typographyTokens.fontSize.xl,
+    fontSizeHeading1: typographyTokens.fontSize.heading,
+    lineHeight: typographyTokens.lineHeight.base,
 
-    borderRadius: BRAND_SIZES.borderRadius,
-    borderRadiusSM: BRAND_SIZES.borderRadiusSm,
-    borderRadiusLG: BRAND_SIZES.borderRadiusLg,
+    // Radius
+    borderRadius: radiusTokens.base,
+    borderRadiusSM: radiusTokens.sm,
+    borderRadiusLG: radiusTokens.lg,
 
-    controlHeight: BRAND_SIZES.controlHeight,
-    controlHeightSM: BRAND_SIZES.controlHeightSm,
-    controlHeightLG: BRAND_SIZES.controlHeightLg,
+    // Control height
+    controlHeight: sizeTokens.controlHeightBase,
+    controlHeightSM: sizeTokens.controlHeightSm,
+    controlHeightLG: sizeTokens.controlHeightLg,
 
-    padding: BRAND_SPACING.md,
-    paddingSM: BRAND_SPACING.sm,
-    paddingLG: BRAND_SPACING.lg,
-    paddingXS: BRAND_SPACING.xs,
+    // Spacing
+    padding: spacingTokens.md,
+    paddingSM: spacingTokens.sm,
+    paddingLG: spacingTokens.lg,
+    paddingXS: spacingTokens.xs,
+    margin: spacingTokens.md,
+    marginSM: spacingTokens.sm,
+    marginLG: spacingTokens.lg,
+    marginXS: spacingTokens.xs,
 
-    margin: BRAND_SPACING.md,
-    marginSM: BRAND_SPACING.sm,
-    marginLG: BRAND_SPACING.lg,
-    marginXS: BRAND_SPACING.xs,
+    // Shadow
+    boxShadow: shadowTokens.base,
+    boxShadowSecondary: shadowTokens.sm,
 
-    boxShadow: BRAND_SHADOWS.base,
-    boxShadowSecondary: BRAND_SHADOWS.sm,
+    // Breakpoint (신규 반영)
+    screenXS: breakpointTokens.xs,
+    screenSM: breakpointTokens.sm,
+    screenMD: breakpointTokens.md,
+    screenLG: breakpointTokens.lg,
+    screenXL: breakpointTokens.xl,
+    screenXXL: breakpointTokens.xxl,
+
+    // Z-index (신규 반영)
+    zIndexBase: zIndexTokens.base,
+    zIndexPopupBase: zIndexTokens.popover,
+
+    // Motion (신규 반영 — AntD의 motionUnit은 초 단위 배율 개념이라
+    // motionTokens.duration.fast를 근사치로 매핑)
+    motionUnit: motionTokens.duration.fast,
   },
+
   components: {
     Button: {
-      controlHeight: BRAND_SIZES.controlHeight,
-      controlHeightSM: BRAND_SIZES.controlHeightSm,
-      controlHeightLG: BRAND_SIZES.controlHeightLg,
-      borderRadius: BRAND_SIZES.borderRadius,
-      fontWeight: BRAND_TYPOGRAPHY.fontWeightMedium,
-      primaryShadow: BRAND_SHADOWS.none,
+      controlHeight: componentTokens.button.height.base,
+      controlHeightSM: componentTokens.button.height.sm,
+      controlHeightLG: componentTokens.button.height.lg,
+      borderRadius: componentTokens.button.borderRadius.base,
+      borderRadiusSM: componentTokens.button.borderRadius.sm,
+      paddingInline: componentTokens.button.paddingInline.base,
+      paddingInlineSM: componentTokens.button.paddingInline.sm,
+      paddingInlineLG: componentTokens.button.paddingInline.lg,
+      fontWeight: componentTokens.button.fontWeight,
+      primaryShadow: shadowTokens.none,
     },
     Input: {
-      controlHeight: BRAND_SIZES.controlHeight,
-      controlHeightSM: BRAND_SIZES.controlHeightSm,
-      controlHeightLG: BRAND_SIZES.controlHeightLg,
-      borderRadius: BRAND_SIZES.borderRadius,
-      activeBorderColor: BRAND_COLORS.primary,
-      hoverBorderColor: BRAND_COLORS.primaryHover,
+      controlHeight: componentTokens.input.height.base,
+      controlHeightSM: componentTokens.input.height.sm,
+      controlHeightLG: componentTokens.input.height.lg,
+      borderRadius: componentTokens.input.borderRadius,
+      activeBorderColor: colorTokens.brand[500],
+      hoverBorderColor: colorTokens.brand[400],
     },
     Select: {
-      controlHeight: BRAND_SIZES.controlHeight,
-      controlHeightSM: BRAND_SIZES.controlHeightSm,
-      controlHeightLG: BRAND_SIZES.controlHeightLg,
-      borderRadius: BRAND_SIZES.borderRadius,
+      controlHeight: componentTokens.input.height.base,
+      controlHeightSM: componentTokens.input.height.sm,
+      controlHeightLG: componentTokens.input.height.lg,
+      borderRadius: componentTokens.input.borderRadius,
     },
     Table: {
-      borderRadius: BRAND_SIZES.borderRadius,
-      headerBg: BRAND_COLORS.bgSpotlight,
-      headerColor: BRAND_COLORS.textPrimary,
-      headerBorderRadius: BRAND_SIZES.borderRadius,
-      cellPaddingBlock: BRAND_SPACING.sm,
-      cellPaddingInline: BRAND_SPACING.md,
-      rowHoverBg: BRAND_COLORS.primaryBg,
+      borderRadius: componentTokens.table.borderRadius,
+      headerBg: componentTokens.table.headerBg,
+      headerColor: componentTokens.table.headerColor,
+      headerBorderRadius: componentTokens.table.borderRadius,
+      cellPaddingBlock: componentTokens.table.cellPaddingBlock,
+      cellPaddingInline: componentTokens.table.cellPaddingInline,
+      rowHoverBg: componentTokens.table.rowHoverBg,
     },
     Popconfirm: {
-      borderRadiusOuter: BRAND_SIZES.borderRadius,
+      borderRadiusOuter: radiusTokens.base,
     },
     Card: {
-      borderRadiusLG: BRAND_SIZES.borderRadiusLg,
-      boxShadowTertiary: BRAND_SHADOWS.sm,
+      borderRadiusLG: radiusTokens.lg,
+      boxShadowTertiary: shadowTokens.sm,
     },
   },
 };

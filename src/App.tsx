@@ -1,7 +1,7 @@
 import { Flex, Space, Typography } from 'antd';
 import { CompanyProvider } from './theme';
 import { CompanySearchBar, ConfirmDeleteButton } from './components';
-import { BRAND_SPACING } from './theme/tokens';
+import { spacingTokens } from './theme/tokens';
 
 const FILTER_OPTIONS = [
   { label: '이름', value: 'name' },
@@ -12,10 +12,10 @@ const FILTER_OPTIONS = [
 export default function App() {
   return (
     <CompanyProvider>
-      <Flex vertical gap={BRAND_SPACING.xl} align="center">
+      <Flex vertical gap={spacingTokens.xl} align="center">
         <Typography.Title level={3}>디자인 시스템 가이드</Typography.Title>
 
-        <Flex vertical gap={BRAND_SPACING.md} style={{ minWidth: 480 }}>
+        <Flex vertical gap={spacingTokens.md} style={{ minWidth: 480 }}>
           <Typography.Title level={5}>CompanySearchBar</Typography.Title>
           <CompanySearchBar
             filterOptions={FILTER_OPTIONS}
@@ -25,9 +25,9 @@ export default function App() {
           />
         </Flex>
 
-        <Flex vertical gap={BRAND_SPACING.md} style={{ minWidth: 480 }}>
+        <Flex vertical gap={spacingTokens.md} style={{ minWidth: 480 }}>
           <Typography.Title level={5}>ConfirmDeleteButton</Typography.Title>
-          <Space size={BRAND_SPACING.sm}>
+          <Space size={spacingTokens.sm}>
             <ConfirmDeleteButton onConfirm={() => console.log('deleted')} />
           </Space>
         </Flex>
