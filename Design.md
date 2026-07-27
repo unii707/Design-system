@@ -105,6 +105,16 @@ hex를 따로 정하지 않습니다.
   폴더 단위로 추가하고 `src/components/index.ts`에서 export 한다.
 - 공통 컴포넌트는 항상 `CompanyProvider`가 적용된 상태를 가정하고 작성하며, 자체적으로
   테마를 재정의하지 않는다.
+- **새 공통 컴포넌트를 추가할 때는 같은 폴더에 `*.stories.tsx`를 함께 작성하는 것이
+  필수다.** props로 노출되는 값은 `argTypes`의 `control`로 연결해 Storybook UI에서
+  바로 조작할 수 있게 한다. 스토리가 없는 컴포넌트는 리뷰에서 반려한다.
+
+### Storybook 실행
+
+- `npm run storybook` — 개발 서버 실행 (`http://localhost:6006`). `.storybook/preview.tsx`의
+  `CompanyProvider` decorator가 모든 스토리에 자동으로 적용되므로, 별도로 Provider를
+  감싸지 않아도 브랜드 테마(색상/폰트/여백 등)가 반영된 상태로 렌더링된다.
+- `npm run build-storybook` — 정적 빌드 (`storybook-static/`, git 추적 제외).
 
 ## 8. 새 프로젝트에 이 디자인 시스템을 적용하는 절차
 
