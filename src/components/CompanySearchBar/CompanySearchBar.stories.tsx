@@ -11,6 +11,7 @@ const FILTER_OPTIONS = [
 const meta = {
   title: 'Components/CompanySearchBar',
   component: CompanySearchBar,
+  tags: ['autodocs'],
   parameters: {
     layout: 'padded',
   },

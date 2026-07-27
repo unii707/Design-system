@@ -5,6 +5,7 @@ import { ConfirmDeleteButton } from './ConfirmDeleteButton';
 const meta = {
   title: 'Components/ConfirmDeleteButton',
   component: ConfirmDeleteButton,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
